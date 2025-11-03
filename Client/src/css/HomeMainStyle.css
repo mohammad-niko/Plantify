@@ -1,0 +1,295 @@
+main {
+  margin-top: 50px;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.product-card {
+  width: 270px;
+  border-radius: 8px;
+  overflow: hidden;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.product-image-container {
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.product-details {
+  padding: 10px 20px 0;
+  text-align: left;
+}
+
+.product-category {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+.product-name {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 5px 0 10px;
+}
+
+.product-rating {
+  color: gold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.product-price-and-offPrice {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+}
+
+.product-price {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.product-offPrice {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 8px;
+  color: gray;
+  text-decoration: line-through;
+}
+
+.hover-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.product-card:hover .hover-actions {
+  opacity: 1;
+}
+
+.cart-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.add-to-cart-text {
+  padding: 8px 12px;
+  border-radius: 20px 0 0 20px;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-right: -10px;
+  opacity: 0;
+  overflow: hidden;
+  padding-left: 0;
+  padding-right: 0;
+  transition: max-width 0.3s ease, padding 0.3s ease, margin-right 0.3s ease;
+  white-space: nowrap;
+  margin-right: -10px;
+}
+
+.cart-icon-wrapper:hover + .add-to-cart-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cart-action-group {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.product-card:hover .cart-action-group {
+  opacity: 1;
+}
+
+.cart-icon-wrapper:hover ~ .add-to-cart-text {
+  max-width: 120px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-right: -10px;
+}
+
+@media (max-width: 770px) {
+  .product-card {
+    width: 230px;
+    border-radius: 8px;
+    overflow: hidden;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .product-image-container {
+    background-color: #f7f7f7;
+    padding: 10px;
+  }
+
+  .product-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .product-details {
+    padding: 10px 10px 0;
+    text-align: left;
+  }
+
+  .product-category {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+
+  .product-name {
+    font-size: 1em;
+    font-weight: 500;
+    margin: 5px 0 10px;
+  }
+
+  .product-rating {
+    color: gold;
+    font-size: 1em;
+    margin-bottom: 5px;
+  }
+
+  .product-price-and-offPrice {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .product-price {
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-top: 8px;
+    color: gray;
+    list-style: inside;
+  }
+
+  .product-offPrice {
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+}
+
+/* Toast style */
+/* ===== Toast Container ===== */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px; /* 🔹 فاصله بین توست‌ها کمتر شد */
+  z-index: 9999;
+}
+
+/* ===== Toast Box ===== */
+.toast {
+  display: flex;
+  align-items: center;
+  background-color: #ffffffcc; /* سفید نیمه‌شفاف */
+  border-left: 4px solid #4caf50; /* سبز طبیعی */
+  padding: 12px 16px;
+  border-radius: 12px;
+  min-width: 260px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Poppins", sans-serif;
+  color: #2e2e2e;
+  transform: translateX(-150%);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+/* ===== Animation States ===== */
+.toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.toast.hide-animation {
+  opacity: 0;
+  transform: translateX(-150%);
+}
+
+/* ===== Toast Types ===== */
+.toast.success {
+  border-left-color: #6bbf59;
+}
+
+.toast.error {
+  border-left-color: #d9534f;
+}
+
+.toast.warning {
+  border-left-color: #ffb74d;
+}
+
+/* ===== Icon ===== */
+.toast-icon {
+  font-size: 1.2rem;
+  margin-right: 10px;
+  color: #4caf50;
+}
+
+.toast.error .toast-icon {
+  color: #d9534f;
+}
+
+.toast.warning .toast-icon {
+  color: #ff9800;
+}
+
+/* ===== Message ===== */
+.toast-message {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* ===== Close Button ===== */
+.toast-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.toast-close-btn:hover {
+  color: #000;
+}

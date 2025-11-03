@@ -1,21 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "../src/css/HeaderStyle.css";
-import "../src/css/MainStyle.css";
-import Header from "./Components/headerSide/Header";
-import HeroSection from "./Components/headerSide/HeroSection";
-import Main from "./Components/main/Main";
+import "../src/css/HomeMainStyle.css";
+import "../src/css/ShopMainStyle.css";
+import "../src/css/ErrorStyle.css"
+import {useRoutes} from "react-router-dom";
+import routes from "./Routes/routes";
 
 function App() {
+  const element = useRoutes(routes)
   return (
     <>
-      <section className="hero">
-        <Header />
-        <HeroSection />
-      </section>
-      <main>
-        <Main />
-      </main>
+    {element}
     </>
   );
 }

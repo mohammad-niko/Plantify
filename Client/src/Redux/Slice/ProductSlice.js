@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
+import { current } from "@reduxjs/toolkit";
 const initialState = {
   products: [
     {
@@ -72,22 +73,68 @@ const initialState = {
       src: "https://websitedemos.net/plant-store-02/wp-content/uploads/sites/410/2019/01/cactus6-free-img.jpg",
     },
   ],
+  cartLists: [],
+  totalPriceOfCartList: 0,
 };
 
 const ProductReducer = createSlice({
   name: "product",
-  initialState: initialState,
+  initialState,
   reducers: {
     addToCart: (state, action) => {
-      const find = state.products.find((item) => item.id === action.payload);
-      if (find) state.cartLists.push(find);
-    },
+      const findItem = state.products.find(
+        (item) => item.id === action.payload
+      );
+      if (!findItem) return;
 
+      const priceToAdd = Number(findItem.offPrice || findItem.price);
+
+      const haveItem = state.cartLists.find(
+        (item) => item.id === action.payload
+      );
+      if (haveItem) {
+        haveItem.quantity = haveItem.quantity + 1;
+        state.totalPriceOfCartList += priceToAdd;
+      } else {
+        state.cartLists.push({ ...findItem, quantity: 1 });
+        state.totalPriceOfCartList += priceToAdd;
+      }
+    },
+    increament(state, action) {
+      const haveItem = state.cartLists.find(
+        (item) => item.id === action.payload
+      );
+      if (!haveItem) return;
+      const priceToAdd = Number(haveItem.offPrice || haveItem.price);
+      haveItem.quantity += 1;
+      state.totalPriceOfCartList += priceToAdd;
+    },
+    decrement(state, action) {
+      const haveItem = state.cartLists.find(
+        (item) => item.id === action.payload
+      );
+      if (!haveItem) return;
+      const priceToAdd = Number(haveItem.offPrice || haveItem.price);
+      haveItem.quantity -= 1;
+      state.totalPriceOfCartList -= priceToAdd;
+    },
     removeFromList: (state, action) => {
-      return state.cartLists.filter((item) => item.id !== action.payload);
+      const haveItem = state.cartLists.find(
+        (item) => item.id === action.payload
+      );
+      if (!haveItem) return;
+
+      const price = haveItem.offPrice || haveItem.price;
+      const totalPriceProduce = price * haveItem.quantity;
+
+      state.totalPriceOfCartList -= totalPriceProduce;
+      state.cartLists = state.cartLists.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });
 
 export default ProductReducer.reducer;
-export const { addToCart, removeFromList } = ProductReducer.actions;
+export const { addToCart, removeFromList, increament, decrement } =
+  ProductReducer.actions;

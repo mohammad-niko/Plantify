@@ -1,11 +1,14 @@
 import { StarRating } from "./StarRating";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../Redux/Slice/ProductSlice";
-const ProductCard = ({ data }) => {
+
+const ProductCard = ({ data, onAddToCartSuccess }) => {
   const { id, type, name, stars, price, src, offPrice } = data;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   function hendleAddToCart() {
-    dispatch(addToCart(id))
+   dispatch(addToCart(id))
+  onAddToCartSuccess(`🛒 ${name}added to cart list`);
   }
 
   return (
@@ -36,8 +39,10 @@ const ProductCard = ({ data }) => {
         <StarRating rating={stars} />
 
         <div className="product-price-and-offPrice">
-          {offPrice && <p className="product-offPrice">{offPrice}</p>}
-          <p className="product-price">{price}</p>
+          <p className={offPrice ? "product-offPrice" : "product-price"}>
+            {price}
+          </p>
+          {offPrice && <p className="product-price">{offPrice}</p>}
         </div>
       </div>
     </div>
