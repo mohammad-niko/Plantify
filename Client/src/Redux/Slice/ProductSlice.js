@@ -6,7 +6,7 @@ const initialState = {
     {
       id: uuid(),
       type: "Plants",
-      name: "Boncellensis Secullant",
+      name: "Boncellensis",
       stars: 3,
       price: "34.00",
       src: "https://websitedemos.net/plant-store-02/wp-content/uploads/sites/410/2019/01/plant3-free-img.jpg",

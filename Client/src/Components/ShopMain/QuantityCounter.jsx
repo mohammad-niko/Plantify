@@ -6,7 +6,7 @@ import {
 } from "../../Redux/Slice/ProductSlice";
 import { Trash2 } from "lucide-react";
 
-function QuantityCounter({ id }) {
+function QuantityCounter({ id, onAddToCartSuccess }) {
   const min = 1;
   const max = 4;
   const dispatch = useDispatch();
@@ -15,15 +15,14 @@ function QuantityCounter({ id }) {
     store.Product.cartLists.find((item) => item.id === id)
   );
 
- 
   if (!item) return null;
 
   const quantity = item.quantity;
 
   const handleDecrement = () => {
     if (quantity === min) {
-      
       dispatch(removeFromList(id));
+      onAddToCartSuccess(` remove from list`);
     } else {
       dispatch(decrement(id));
     }

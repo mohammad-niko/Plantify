@@ -1,14 +1,22 @@
 import { StarRating } from "./StarRating";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../Redux/Slice/ProductSlice";
 
-const ProductCard = ({ data, onAddToCartSuccess }) => {
+const ProductCard = ({ data, onAddToCart }) => {
   const { id, type, name, stars, price, src, offPrice } = data;
   const dispatch = useDispatch();
+  const quantity = useSelector(
+    (store) => store.Product.cartLists?.find((item) => item.id === id)?.quantity
+  );
+  const maxQuantity = 4;
 
   function hendleAddToCart() {
-   dispatch(addToCart(id))
-  onAddToCartSuccess(`🛒 ${name}added to cart list`);
+    if (quantity >= maxQuantity){
+     onAddToCart(`you can't add more`,"error")
+     return
+    }
+    dispatch(addToCart(id));
+    onAddToCart(`added to list`);
   }
 
   return (

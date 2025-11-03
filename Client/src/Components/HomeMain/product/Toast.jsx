@@ -49,6 +49,12 @@ function Toast({ message, show, onClose, type = "success", toastIndex }) {
       }`}
       style={{
         transform: `translateY(-${verticalOffset}px)`,
+        backgroundColor:
+          type === "success"
+            ? "rgba(34, 197, 94, 0.9)"
+            : type === "warning"
+            ? "rgba(251, 191, 36, 0.9)"
+            : "rgba(239, 68, 68, 0.9)",
       }}
     >
       <span className="toast-icon">{typeIcons[type]}</span>
